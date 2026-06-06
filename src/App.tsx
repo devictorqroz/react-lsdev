@@ -1,48 +1,61 @@
-import { useState } from "react";
+
+interface ICardProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const Card = (props: ICardProps) => {
+
+  return (
+    <div style={{ border: '1px solid black' }}>
+      <span>Title: {props.title}</span>
+
+      <div>
+        {props.children}
+      </div>
+
+      <div>
+        Footer
+      </div>
+    </div>
+  );
+}
+
+
 
 export function App() {
 
   return (
-    <>
+    <div>
       Olá
-    </>
+
+      <p>Card:</p>
+
+      <Card title='Testando'>
+        wow
+      </Card>
+    </div>
   )
 }
 
 
-// JS Function
-const test = () => {
-  return 1 + 1;
-}
 
+// 1. Extraímos o { title } direto dos parâmetros
+// const Card = ({ title }: ICardProps) => {
 
-// JS Function
-const useTest = () => {
-  return 1 + 1;
-}
+//   return (
+//     <div style={{ border: '1px solid black' }}>
+//       {/* 2. Usamos direto a variável title, sem precisar do "props." */}
+//       <span>Title: {title}</span>
 
+//       <div>
+//         Context
+//       </div>
 
-// React Hook 
-const useTeste = () => {
-  const [value] = useState(1 + 1);
-  
-  return value;
-}
-
-
-// React Functional Component
-const MyParagraph = () => {
-  return (
-    <p>Lorem ipsum</p>
-  )
-}
-
-
-// JS Function that return "html react"
-// Bad idea
-const myParagraph = () => {
-  return (
-    <p>Lorem ipsum</p>
-  )
-}
+//       <div>
+//         Footer
+//       </div>
+//     </div>
+//   );
+// }
 

@@ -1,61 +1,38 @@
-
-interface ICardProps {
-  title: string;
-  children: React.ReactNode;
-}
-
-const Card = (props: ICardProps) => {
-
-  return (
-    <div style={{ border: '1px solid black' }}>
-      <span>Title: {props.title}</span>
-
-      <div>
-        {props.children}
-      </div>
-
-      <div>
-        Footer
-      </div>
-    </div>
-  );
-}
-
-
+import { useState } from "react"
 
 export function App() {
 
+  const [count, setCount] = useState(0);
+  const [hide, setHide] = useState(false);
+
+  if (hide) return null;
+
+  
+
+
   return (
     <div>
-      Olá
+      {/* {hide && <p>Teste 1</p>} */}
+      {/* {!hide && <p>Teste 2</p>} */}
+      
+      {hide
+        ? <p>Teste 1</p>
+        : <p>Teste 2</p>
+      }
 
-      <p>Card:</p>
+      <button onClick={() => setCount(count +1)}>
+        {count}
+      </button>
 
-      <Card title='Testando'>
-        wow
-      </Card>
+       <button onClick={() => setHide(!hide)}>
+        Toggle
+      </button>
     </div>
   )
 }
 
 
 
-// 1. Extraímos o { title } direto dos parâmetros
-// const Card = ({ title }: ICardProps) => {
 
-//   return (
-//     <div style={{ border: '1px solid black' }}>
-//       {/* 2. Usamos direto a variável title, sem precisar do "props." */}
-//       <span>Title: {title}</span>
 
-//       <div>
-//         Context
-//       </div>
-
-//       <div>
-//         Footer
-//       </div>
-//     </div>
-//   );
-// }
 

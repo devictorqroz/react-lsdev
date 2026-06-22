@@ -9,6 +9,11 @@ export const InputAdd = (props: IInputAddProps) => {
 
   const [value, setValue] = useState("");
 
+  const handleAdd = () => {
+    props.onAdd(value); 
+    setValue('');
+  }
+
 
   return (
     <div>
@@ -17,7 +22,7 @@ export const InputAdd = (props: IInputAddProps) => {
         onChange={(e) => setValue(e.target.value)}
       />
       
-      <button onClick={() => { props.onAdd(value); setValue(''); }}>
+      <button onClick={handleAdd}>
         Adicionar
       </button>
     </div>

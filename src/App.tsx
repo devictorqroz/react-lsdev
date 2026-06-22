@@ -2,9 +2,9 @@ import { useState } from "react"
 
 import { InputAdd } from "./components/InputAdd";
 
-export function App() {
 
-  
+
+export function App() {
 
   const [list, setList] = useState([
     {id: '1', label: 'fazer café', complete: false },
@@ -14,17 +14,17 @@ export function App() {
   ]);
 
 
+  const handleAdd = (value: string) => {
+    setList([
+      ...list, 
+      { id: (list.length + 1).toString(), complete: false, label: value }
+    ]);
+  }
+
+
   return (
     <div>
-      <InputAdd 
-        onAdd={(value) => {
-          setList([
-            ...list, 
-            { id: (list.length + 1).toString(), complete: false, label: value }
-          ])
-        }}
-      />
-
+      <InputAdd onAdd={handleAdd} />
 
       <ol>
         {list.map((listItem) => (

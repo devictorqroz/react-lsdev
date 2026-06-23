@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import { InputAdd } from "./components/InputAdd";
+import { TodoItem } from "./components/TodoItem";
 
 
 
@@ -21,6 +22,14 @@ export function App() {
     ]);
   }
 
+  // const handleOnComplete = (id:string, complete: boolean) => {
+
+  // }
+
+  // const handleOnRemove = (id: string) => {
+  //   setList([...list.filter(item => item.id !== listItem.id)]);
+  // }
+
 
   return (
     <div>
@@ -28,31 +37,24 @@ export function App() {
 
       <ol>
         {list.map((listItem) => (
-          <li key={listItem.id}>
-            {listItem.label}
+          <TodoItem 
+            key={listItem.id}
 
-            {listItem.complete ? ' Concluido ' : ''}
+            id={listItem.id}
+            label={listItem.label}
+            complete={listItem.complete}
 
-            <button 
-              onClick={() => { 
-                setList([
-                  ...list.map(item => ({ 
-                    ...item, 
-                    complete: item.id === listItem.id ? !listItem.complete : item.complete 
-                  }))
-                ]);
-              }}
-            >
-              Concluir
-            </button>
-            <button onClick={() => setList([...list.filter(item => item.id !== listItem.id)])}>
-              Remover
-            </button>
-          </li>
+            onComplete={() => setList([
+              ...list.map(item => ({
+                ...item, 
+                complete: item.id === listItem.id ? !item.complete : item.complete
+              }))
+            ])}
+            onRemove={() =>  setList([...list.filter(item => item.id !== listItem.id)])}
+            // onRemove={handleOnRemove}
+          />
         ))}
       </ol>
-
-
     </div>
   )
 }

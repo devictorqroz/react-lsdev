@@ -1,25 +1,23 @@
 
-
 interface ITodoItemProps {
     id: string;
     label: string;
     complete: boolean;
     
-    onComplete(): void;
-    // onRemove(id: string): void;
-    onRemove(): void;
+    onComplete(id: string): void;
+    onRemove(id: string): void;
 }
 
 export const TodoItem = ({ id, label, complete, onComplete, onRemove }: ITodoItemProps) => {
 
   
-    // const handleOnComplete = () => {
-    //    onComplete();
-    // }
+    const handleOnComplete = () => {
+       onComplete(id);
+    }
 
-    // const handleOnRemove = () => {
-    //     onRemove(id);
-    // }
+    const handleOnRemove = () => {
+        onRemove(id);
+    }
 
 
     return (
@@ -28,11 +26,11 @@ export const TodoItem = ({ id, label, complete, onComplete, onRemove }: ITodoIte
 
         {complete ? ' Concluido ' : ''}
 
-        <button onClick={onComplete}>
+        <button onClick={handleOnComplete}>
             Complete
         </button>
         
-        <button onClick={onRemove}>
+        <button onClick={handleOnRemove}>
             Remove
         </button>
       </li>

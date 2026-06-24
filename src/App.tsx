@@ -22,13 +22,18 @@ export function App() {
     ]);
   }
 
-  // const handleOnComplete = (id:string, complete: boolean) => {
+  const handleOnComplete = (id:string) => {
+    setList([
+      ...list.map(item => ({
+        ...item, 
+        complete: item.id === id ? !item.complete : item.complete
+      }))
+    ])
+  }
 
-  // }
-
-  // const handleOnRemove = (id: string) => {
-  //   setList([...list.filter(item => item.id !== listItem.id)]);
-  // }
+  const handleOnRemove = (id: string) => {
+    setList([...list.filter(item => item.id !== id)]);
+  }
 
 
   return (
@@ -44,14 +49,8 @@ export function App() {
             label={listItem.label}
             complete={listItem.complete}
 
-            onComplete={() => setList([
-              ...list.map(item => ({
-                ...item, 
-                complete: item.id === listItem.id ? !item.complete : item.complete
-              }))
-            ])}
-            onRemove={() =>  setList([...list.filter(item => item.id !== listItem.id)])}
-            // onRemove={handleOnRemove}
+            onComplete={handleOnComplete}
+            onRemove={handleOnRemove}
           />
         ))}
       </ol>

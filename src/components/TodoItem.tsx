@@ -11,26 +11,26 @@ interface ITodoItemProps {
 export const TodoItem = ({ id, label, complete, onComplete, onRemove }: ITodoItemProps) => {
 
   
-    const handleOnComplete = () => {
+    const handleComplete = () => {
        onComplete(id);
     }
 
-    const handleOnRemove = () => {
+    const handleRemove = () => {
         onRemove(id);
     }
 
 
     return (
-      <li key={id}>
+      <li>
         {label}
 
         {complete ? ' Concluido ' : ''}
 
-        <button onClick={handleOnComplete}>
+        <button onClick={handleComplete}>
             Complete
         </button>
         
-        <button onClick={handleOnRemove}>
+        <button onClick={handleRemove}>
             Remove
         </button>
       </li>

@@ -22,7 +22,7 @@ export function App() {
     ]);
   }
 
-  const handleOnComplete = (id:string) => {
+  const handleComplete = (id:string) => {
     setList([
       ...list.map(item => ({
         ...item, 
@@ -31,7 +31,7 @@ export function App() {
     ])
   }
 
-  const handleOnRemove = (id: string) => {
+  const handleRemove = (id: string) => {
     setList([...list.filter(item => item.id !== id)]);
   }
 
@@ -49,8 +49,8 @@ export function App() {
             label={listItem.label}
             complete={listItem.complete}
 
-            onComplete={handleOnComplete}
-            onRemove={handleOnRemove}
+            onComplete={handleComplete}
+            onRemove={handleRemove}
           />
         ))}
       </ol>

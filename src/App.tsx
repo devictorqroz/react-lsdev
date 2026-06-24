@@ -2,23 +2,31 @@ import { useState } from "react"
 
 import { InputAdd } from "./components/InputAdd";
 import { TodoItem } from "./components/TodoItem";
+import { List } from "./components/List";
 
+
+interface ITodo {
+  id: string;
+  label: string;
+  complete: boolean;
+}
 
 
 export function App() {
 
-  const [list, setList] = useState([
-    {id: '1', label: 'fazer café', complete: false },
-    {id: '2', label: 'fazer café', complete: false },
-    {id: '3', label: 'fazer almoço', complete: false },
-    {id: '4', label: 'fazer janta', complete: false }
-  ]);
+  const [list, setList] = useState<ITodo[]>([]);
 
 
   const handleAdd = (value: string) => {
+    if (value.trim() === "") return;
+
     setList([
       ...list, 
-      { id: (list.length + 1).toString(), complete: false, label: value }
+      { 
+        id: crypto.randomUUID(), 
+        complete: false, 
+        label: value.trim() 
+      }
     ]);
   }
 
@@ -28,7 +36,7 @@ export function App() {
         ...item, 
         complete: item.id === id ? !item.complete : item.complete
       }))
-    ])
+    ]);
   }
 
   const handleRemove = (id: string) => {
@@ -40,7 +48,7 @@ export function App() {
     <div>
       <InputAdd onAdd={handleAdd} />
 
-      <ol>
+      <List>
         {list.map((listItem) => (
           <TodoItem 
             key={listItem.id}
@@ -53,13 +61,9 @@ export function App() {
             onRemove={handleRemove}
           />
         ))}
-      </ol>
+      </List>
     </div>
-  )
+  );
 }
-
-
-
-
 
 

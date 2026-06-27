@@ -5,24 +5,6 @@ import { InputAdd } from "./components/InputAdd";
 import { TodoItem } from "./components/TodoItem";
 import { List } from "./components/List";
 
-
-// TodoAPI.getAll().then(data => console.log('1', data));
-
-// TodoAPI.create({ label: 'Devocional', complete: false });
-// TodoAPI.create({ label: 'Oração', complete: false });
-
-// TodoAPI.getAll().then(data => console.log('2', data));
-
-// TodoAPI.updateById('1', { label: 'Leitura Noite', complete: false });
-
-// TodoAPI.getAll().then(data => console.log('3', data));
-
-// TodoAPI.deleteById('1');
-
-// TodoAPI.getAll().then(data => console.log('4', data));
-
-
-
 interface ITodo {
   id: string;
   label: string;
@@ -32,18 +14,13 @@ interface ITodo {
 
 export function App() {
 
-  const [count, setCount] = useState(0);
-
   const [list, setList] = useState<ITodo[]>([]);
 
-
-  console.log('log: render');
-
+  
   useEffect(() => {
-
-    console.log('log: effect');
-
-  }, [list]);
+    TodoAPI.getAll()
+      .then(data => setList(data));
+  }, []);
 
 
   const handleAdd = (value: string) => {
@@ -75,10 +52,6 @@ export function App() {
 
   return (
     <div>
-      <button onClick={() => setCount(count + 1)}>
-        {count}
-      </button>
-
       <InputAdd onAdd={handleAdd} />
 
       <List>

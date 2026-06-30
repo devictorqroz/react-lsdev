@@ -1,22 +1,16 @@
 import { useState, useEffect } from "react"
 
-import { TodoAPI } from "./shared/services/api/TodoAPI";
+import { TodoAPI, type ITodo } from "./shared/services/api/TodoAPI";
 import { InputAdd } from "./components/InputAdd";
 import { TodoItem } from "./components/TodoItem";
 import { List } from "./components/List";
 
-interface ITodo {
-  id: string;
-  label: string;
-  complete: boolean;
-}
 
 
 export function App() {
-
   const [list, setList] = useState<ITodo[]>([]);
 
-  
+
   useEffect(() => {
     TodoAPI.getAll()
       .then(data => setList(data));
@@ -24,31 +18,36 @@ export function App() {
 
 
   const handleAdd = (value: string) => {
-    if (value.trim() === "") return;
-
-    setList([
-      ...list, 
-      { 
-        id: crypto.randomUUID(), 
-        complete: false, 
-        label: value.trim() 
-      }
-    ]);
+    TodoAPI.create({ label: value, complete: false })
+      .then(data => setList([...list, data]));
   }
 
-  const handleComplete = (id:string) => {
-    setList([
-      ...list.map(item => ({
-        ...item, 
-        complete: item.id === id ? !item.complete : item.complete
-      }))
-    ]);
-  }
-
+  
   const handleRemove = (id: string) => {
-    setList([...list.filter(item => item.id !== id)]);
+    TodoAPI.deleteById(id)
+      .then(() => {
+        setList([
+          ...list.filter(item => item.id !== id)
+        ]);
+      });
   }
 
+  const handleComplete = (id: string) => {
+    const itemAtual = list.find(item => item.id === id);
+    if (!itemAtual) return;
+
+    TodoAPI.updateById(id, { complete: !itemAtual.complete })
+      .then(() => {
+        setList([
+          ...list.map(item => ({
+            ...item, 
+            complete: item.id === id ? !item.complete : item.complete
+          }))
+        ]);
+      });
+  }
+
+  
 
   return (
     <div>
@@ -71,5 +70,3 @@ export function App() {
     </div>
   );
 }
-
-

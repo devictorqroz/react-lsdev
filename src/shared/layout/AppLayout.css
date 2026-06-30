@@ -1,0 +1,14 @@
+.layout-base {
+    padding: 8px;
+    background-color: #ececec;
+}
+
+.layout-header {
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.layout-divider {
+    border-color: #00000025;
+}

@@ -4,6 +4,7 @@ import { TodoAPI, type ITodo } from "../shared/services/api/TodoAPI";
 import { InputAdd } from "../components/InputAdd";
 import { List } from "../components/List";
 import { TodoItem } from "../components/TodoItem";
+import { PageLayout } from "../shared/layout/page-layout/PageLayout";
 
 
 
@@ -50,24 +51,24 @@ const [list, setList] = useState<ITodo[]>([]);
     
 
     return (
-    <div>
-        <InputAdd onAdd={handleAdd} />
+        <PageLayout title='Página inicial'>
+            <InputAdd onAdd={handleAdd} />
 
-        <List>
-        {list.map((listItem) => (
-            <TodoItem 
-            key={listItem.id}
+            <List>
+            {list.map((listItem) => (
+                <TodoItem 
+                key={listItem.id}
 
-            id={listItem.id}
-            label={listItem.label}
-            complete={listItem.complete}
+                id={listItem.id}
+                label={listItem.label}
+                complete={listItem.complete}
 
-            onComplete={handleComplete}
-            onRemove={handleRemove}
-            />
-        ))}
-        </List>
-    </div>
+                onComplete={handleComplete}
+                onRemove={handleRemove}
+                />
+            ))}
+            </List>
+        </PageLayout>
     );
 }
 

@@ -1,38 +1,31 @@
+import TodoItemStyles from './TodoItem.module.css';
 
 interface ITodoItemProps {
     id: string;
     label: string;
     complete: boolean;
     
-    onComplete(id: string): void;
-    onRemove(id: string): void;
+    onComplete(): void;
+    onRemove(): void;
 }
 
 export const TodoItem = ({ id, label, complete, onComplete, onRemove }: ITodoItemProps) => {
-
-  
-    const handleComplete = () => {
-       onComplete(id);
-    }
-
-    const handleRemove = () => {
-        onRemove(id);
-    }
-
-
     return (
-      <li>
-        {label}
+        <li key={id} className={TodoItemStyles.Item} data-complete={complete}>
+            <span className={TodoItemStyles.Text}>
+                {label}
+            </span>
 
-        {complete ? ' Concluido ' : ''}
-
-        <button onClick={handleComplete}>
-            Complete
-        </button>
-        
-        <button onClick={handleRemove}>
-            Remove
-        </button>
-      </li>
+            <div className={TodoItemStyles.ButtonsGroup}>
+                {!complete && (
+                    <button onClick={onComplete} className={TodoItemStyles.ButtonComplete}>
+                        Concluir
+                    </button>
+                )}
+                <button onClick={onRemove} className={TodoItemStyles.ButtonRemove}>
+                Remover
+                </button>
+            </div>
+        </li>
     );
 }

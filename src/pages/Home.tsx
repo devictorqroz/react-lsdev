@@ -7,10 +7,8 @@ import { TodoItem } from "../components/TodoItem";
 import { PageLayout } from "../shared/layout/page-layout/PageLayout";
 
 
-
 export const Home = () => {
 const [list, setList] = useState<ITodo[]>([]);
-
 
     useEffect(() => {
     TodoAPI.getAll()
@@ -22,51 +20,50 @@ const [list, setList] = useState<ITodo[]>([]);
     TodoAPI.create({ label: value, complete: false })
         .then(data => setList([...list, data]));
     }
-
     
     const handleRemove = (id: string) => {
     TodoAPI.deleteById(id)
         .then(() => {
-        setList([
-            ...list.filter(item => item.id !== id)
-        ]);
+            setList([
+                ...list.filter(item => item.id !== id)
+            ]);
         });
     }
 
     const handleComplete = (id: string) => {
-    const itemAtual = list.find(item => item.id === id);
-    if (!itemAtual) return;
+        const itemAtual = list.find(item => item.id === id);
+        if (!itemAtual) return;
 
-    TodoAPI.updateById(id, { complete: !itemAtual.complete })
-        .then(() => {
-        setList([
-            ...list.map(item => ({
-            ...item, 
-            complete: item.id === id ? !item.complete : item.complete
-            }))
-        ]);
+        TodoAPI.updateById(id, { complete: !itemAtual.complete })
+            .then(() => {
+                setList([
+                    ...list.map(item => ({
+                    ...item, 
+                    complete: item.id === id ? !item.complete : item.complete
+                }))
+            ]);
         });
     }
 
     
 
     return (
-        <PageLayout title='Página inicial'>
+        <PageLayout title='TODO List'>
             <InputAdd onAdd={handleAdd} />
 
             <List>
-            {list.map((listItem) => (
-                <TodoItem 
-                key={listItem.id}
+                {list.map((listItem) => (
+                    <TodoItem 
+                        key={listItem.id}
 
-                id={listItem.id}
-                label={listItem.label}
-                complete={listItem.complete}
+                        id={listItem.id}
+                        label={listItem.label}
+                        complete={listItem.complete}
 
-                onComplete={handleComplete}
-                onRemove={handleRemove}
-                />
-            ))}
+                        onRemove={() => handleRemove(listItem.id)}
+                        onComplete={() => handleComplete(listItem.id)}
+                    />
+                ))}
             </List>
         </PageLayout>
     );

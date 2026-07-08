@@ -9,17 +9,13 @@ interface IInputAddProps {
 export const InputAdd = (props: IInputAddProps) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
-  // const countRef = useRef(0);
-
+ 
   const [value, setValue] = useState("");
 
   const handleAdd = () => {
     props.onAdd(value); 
     setValue('');
     inputRef.current?.focus();
-
-    // countRef.current = countRef.current + 1;
-    // console.log(countRef.current);
   }
 
 
@@ -31,8 +27,6 @@ export const InputAdd = (props: IInputAddProps) => {
         className={InputAddStyles.Input}
         onChange={(e) => setValue(e.target.value)}
       />
-      
-      {/* {countRef.current} */}
 
       <button onClick={handleAdd} className={InputAddStyles.Button}>
         Adicionar

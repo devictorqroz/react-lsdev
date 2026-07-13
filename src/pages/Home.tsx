@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 import { TodoAPI, type ITodo } from "../shared/services/api/TodoAPI";
-import { InputAdd } from "../components/InputAdd";
+import { PageLayout } from "../shared/layout/page-layout/PageLayout";
+import HomeStyles from "./Home.module.css";
 import { List } from "../components/List";
 import { TodoItem } from "../components/TodoItem";
-import { PageLayout } from "../shared/layout/page-layout/PageLayout";
 
 
 export const Home = () => {
-const [list, setList] = useState<ITodo[]>([]);
+    
+    const [list, setList] = useState<ITodo[]>([]);
+
 
     useEffect(() => {
     TodoAPI.getAll()
@@ -16,9 +19,8 @@ const [list, setList] = useState<ITodo[]>([]);
     }, []);
 
 
-    const handleAdd = (value: string) => {
-    TodoAPI.create({ label: value, complete: false })
-        .then(data => setList([...list, data]));
+    const handleAdd = () => {
+        
     }
     
     const handleRemove = (id: string) => {
@@ -49,7 +51,11 @@ const [list, setList] = useState<ITodo[]>([]);
 
     return (
         <PageLayout title='TODO List'>
-            <InputAdd onAdd={handleAdd} />
+            <div className={HomeStyles.ButtonContainer}>
+                <Link to='/detalhe/adicionar' className={HomeStyles.Button}>
+                    Adicionar
+                </Link>
+            </div>
 
             <List>
                 {list.map((listItem) => (

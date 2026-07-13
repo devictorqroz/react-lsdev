@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 
 
@@ -18,17 +18,17 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
     const [accessToken, setAccessToken] = useState<string>();
 
 
-    const login = (email: string, password: string) => {
+    const login = useCallback((email: string, password: string) => {
         // chamada ao backend para conseguir token
 
         setEmail(email);
         setAccessToken(crypto.randomUUID());
-    }
+    }, []);
 
-    const logout = () => {
+    const logout = useCallback(() => {
         setEmail(undefined);
         setAccessToken(undefined);
-    }
+    }, []);
 
 
     return (

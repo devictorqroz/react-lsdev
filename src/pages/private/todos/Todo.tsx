@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-import { TodoAPI, type ITodo } from "../shared/services/api/TodoAPI";
-import { PageLayout } from "../shared/layout/page-layout/PageLayout";
-import HomeStyles from "./Home.module.css";
-import { List } from "../components/List";
-import { TodoItem } from "../components/TodoItem";
+import { TodoAPI, type ITodo } from "../../../shared/services/api/TodoAPI";
+import { PageLayout } from "../../../shared/layout/page-layout/PageLayout";
+import TodoStyles from "./Todo.module.css";
+import { List } from "../../../components/List";
+import { TodoItem } from "../../../components/TodoItem";
 
 
-export const Home = () => {
+export const Todo = () => {
     
     const [list, setList] = useState<ITodo[]>([]);
 
@@ -51,8 +51,8 @@ export const Home = () => {
 
     return (
         <PageLayout title='TODO List'>
-            <div className={HomeStyles.ButtonContainer}>
-                <Link to='/detalhe/adicionar' className={HomeStyles.Button}>
+            <div className={TodoStyles.ButtonContainer}>
+                <Link to='/todos/detalhe/adicionar' className={TodoStyles.Button}>
                     Adicionar
                 </Link>
             </div>
@@ -74,10 +74,3 @@ export const Home = () => {
         </PageLayout>
     );
 }
-
-
-
-
-
-
-

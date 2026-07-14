@@ -11,6 +11,9 @@ export const AppLayout = ({ children }: React.PropsWithChildren) => {
                 <NavLink to='/'>
                     Página inicial
                 </NavLink>
+                <NavLink to='/todos'>
+                    TODOs
+                </NavLink>
                 <NavLink to='/sobre'>
                     Sobre
                 </NavLink>

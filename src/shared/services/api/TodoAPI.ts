@@ -5,11 +5,13 @@ const axiosInstance = axios.create();
 export interface ITodo {
     id: string;
     label: string;
+    description: string;
     complete: boolean;
 }
 
 interface ITodoWithoutId {
     label: string;
+    description: string;
     complete: boolean;
 }
 
@@ -17,6 +19,11 @@ export const TodoAPI = {
     async getAll() {
         const response = await axiosInstance.get('/api/todos');
         return response.data.todos as ITodo[];
+    },
+    async getById(id: string) {
+        const response = await axiosInstance.get(`/api/todos/${id}`);
+
+        return response.data as ITodo;
     },
     async create(data: ITodoWithoutId) {
         const response = await axiosInstance.post('/api/todos', data);

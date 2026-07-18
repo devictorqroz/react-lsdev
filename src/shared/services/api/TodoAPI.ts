@@ -23,7 +23,7 @@ export const TodoAPI = {
     async getById(id: string) {
         const response = await axiosInstance.get(`/api/todos/${id}`);
 
-        return response.data as ITodo;
+        return response.data.todo as ITodo;
     },
     async create(data: ITodoWithoutId) {
         const response = await axiosInstance.post('/api/todos', data);

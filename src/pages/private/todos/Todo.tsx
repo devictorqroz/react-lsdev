@@ -51,7 +51,7 @@ export const Todo = () => {
 
     return (
         <PageLayout title='TODO List'>
-            <div className={TodoStyles.ButtonContainer}>
+            <div className='flex items-center justify-end'>
                 <Link to='/todos/detalhe/adicionar' className={TodoStyles.Button}>
                     Adicionar
                 </Link>

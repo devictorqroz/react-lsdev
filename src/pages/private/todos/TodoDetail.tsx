@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { parse, isValid } from "date-fns";
+import { parseISO, isValid } from "date-fns";
 import { z } from "zod/v4";
 
 import { PageLayout } from "../../../shared/layout/page-layout/PageLayout";
@@ -18,13 +18,12 @@ const todoSchema = z
         completedAt: z
             .string()
             .optional()
-            .refine((date) => {
-                if (!date) return true;
+            .refine((datetimeLocal) => {
+                if (!datetimeLocal) return true;
 
-                const parsedDate = parse(date, 'yyyy-MM-dd', new Date());
+                const parsedDate = parseISO(datetimeLocal);
                 return isValid(parsedDate);
             }, 'A data não está correta'),
-
     })
     .refine((data) => {
         if (data.complete && !data.completedAt) return false;
@@ -124,7 +123,7 @@ export const TodoDetail = () => {
                     <div className={TodoDetailStyles.FormLabelContainer}>
                         <label htmlFor="completedAt" className={TodoDetailStyles.FormLabel}>Data de finalização</label>
                         <input 
-                            type="date"
+                            type="datetime-local"
                             id="completedAt"
                             className={TodoDetailStyles.FormInput}
                             {...register('completedAt')}

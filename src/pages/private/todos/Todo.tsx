@@ -3,15 +3,12 @@ import { Link } from "react-router";
 
 import { TodoAPI, type ITodo } from "../../../shared/services/api/TodoAPI";
 import { PageLayout } from "../../../shared/layout/page-layout/PageLayout";
-import TodoStyles from "./Todo.module.css";
 import { List } from "../../../components/List";
 import { TodoItem } from "../../../components/TodoItem";
 
 
 export const Todo = () => {
-    
     const [list, setList] = useState<ITodo[]>([]);
-
 
     useEffect(() => {
     TodoAPI.getAll()
@@ -19,10 +16,6 @@ export const Todo = () => {
     }, []);
 
 
-    const handleAdd = () => {
-        
-    }
-    
     const handleRemove = (id: string) => {
     TodoAPI.deleteById(id)
         .then(() => {
@@ -31,6 +24,7 @@ export const Todo = () => {
             ]);
         });
     }
+
 
     const handleComplete = (id: string) => {
         const itemAtual = list.find(item => item.id === id);
@@ -52,7 +46,7 @@ export const Todo = () => {
     return (
         <PageLayout title='TODO List'>
             <div className='flex items-center justify-end'>
-                <Link to='/todos/detalhe/adicionar' className={TodoStyles.Button}>
+                <Link to='/todos/detalhe/adicionar' className='custom-bg-gradient custom-bg-gradient-hover p-2 cursor-pointer px-4 rounded'>
                     Adicionar
                 </Link>
             </div>

@@ -1,3 +1,46 @@
 @import "tailwindcss";
 
 
+@layer base {
+
+    html,
+    body,
+    #root {
+        font-family: 'Segoe UI', Roboto, Arial, Helvetica, sans-serif;
+
+        @apply bg-gray-100 text-gray-800 h-full; 
+    }
+}
+
+@layer theme {
+
+    .custom-bg-gradient {
+        @apply text-white bg-linear-90 from-[#2e8b57] to-[#3cb371];
+    }
+
+    .custom-bg-gradient-hover:hover {
+        @apply from-[#34985f] to-[#43cd81];
+    }
+}
+
+
+/* 
+@layer components {
+
+    .custom-nav-link {
+        @apply p-2 px-4 no-underline rounded hover:bg-[#ffffff33] active:bg-[#ffffff4d] [.active]:bg-[#ffffff4d];
+    }
+
+    .custom-primary-button {
+        border: none;
+        padding: 8px;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+        padding-left: 16px;
+        padding-right: 16px;
+        text-decoration: none;
+        @apply text-white bg-linear-90 from-[#2e8b57] to-[#3cb371] hover:from-[#34985f] hover:to-[#43cd81];
+    }
+} */
